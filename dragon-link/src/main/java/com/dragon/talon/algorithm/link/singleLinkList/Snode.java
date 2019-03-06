@@ -30,4 +30,14 @@ public class Snode<T> {
     public void setNext(Snode next) {
         this.next = next;
     }
+
+    public static void main(String[] args) {
+        String str = "abr";
+        String sta = "abr";
+        System.out.println(sta == str);
+        
+        String b = new String("atr").intern();
+        String a = new String("atr");
+        System.out.println(a == b);
+    }
 }
