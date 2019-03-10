@@ -10,6 +10,7 @@ import java.util.Random;
  * 特点：平均排序与比较次数为 (N^2)/4   最好情况 N-1比较和0次比较 最坏情况 (N^2)/2
  * 插入排序对于最坏情况（逆序数组）效果不好，但是对于部分有序的数组会非常高效
  * 对于一般这种无序的数组100000 速度不如选择排序 13s左右
+ * insert compareAndExchange : 23
  * @author dragonboy
  */
 public class InsertSort {
@@ -17,18 +18,17 @@ public class InsertSort {
         if (arr.length <= 0) {
             throw new IllegalArgumentException("数组不能为空");
         }
-
+        long count = 0; 
         for (int i = 1; i < arr.length; i++) {
-            for (int j = i; j > 0; j--) {
-                if (arr[j].compareTo(arr[j - 1]) > 0) {
-                    break;
-                }
+            for (int j = i; j > 0&&arr[j].compareTo(arr[j - 1])<0; j--) {
+                count++;
                 T temp = arr[j];
                 arr[j] = arr[j - 1];
                 arr[j - 1] = temp;
 
             }
         }
+        System.out.println(" compare and exchange  : "+ count);
     }
 
     public static void main(String[] args) {

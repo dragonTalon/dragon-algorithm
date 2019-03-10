@@ -13,7 +13,8 @@ import java.util.Random;
  * 移动最少
  * 比较次数：(N^2)/2 次
  * 交换次数：N 次
- *  100000数据数独11.71S
+ * 100000数据数独11.71S
+ *
  * @author dragonboy
  */
 public class SelectSort {
@@ -24,10 +25,8 @@ public class SelectSort {
         }
         for (int i = 0; i < length; i++) {
             int min = i;
-            for (int j = i + 1; j < length; j++) {
-                if (arr[min].compareTo(arr[j]) > 0) {
-                    min = j;
-                }
+            for (int j = i + 1; j < length && arr[min].compareTo(arr[j]) < 0; j++) {
+                min = j;
             }
             if (i != min) {
                 T temp = arr[i];
@@ -47,12 +46,12 @@ public class SelectSort {
         Random random = new Random(1000000);
         Integer[] list = new Integer[100000];
         for (int i = 0; i < 100000; i++) {
-            list[i]= random.nextInt();
+            list[i] = random.nextInt();
         }
-        
+
         start = LocalDateTime.now();
         selectSortArr(list);
         System.out.println("100000数据选择排序 ：" + Duration.between(start, LocalDateTime.now()));
-      
+
     }
 }
