@@ -28,6 +28,7 @@ public class MergeSort {
             throw new IllegalArgumentException("Optional length more than array length");
         }
         int i = lo, j = mid + 1;
+        //可以将temp数组成公关，因为这样可以避免创建过多的数组 浪费内存
         T[] temp = (T[]) new Comparable[(hi - lo + 1)];
         for (int k = lo; k <= hi; k++) {
             temp[k - lo] = arr[k];
@@ -50,11 +51,19 @@ public class MergeSort {
 
     }
 
+    /**
+     * （排序算法 ，喜欢用什么都行，只要好用，可以用希尔排序 感觉在有一定的顺序情况下，希尔排序会非常好）
+     *
+     * @param arr
+     * @param begin
+     * @param end
+     * @param <T>
+     */
     public static <T extends Comparable> void insertSort(T[] arr, int begin, int end) {
         if (arr.length < end) {
             throw new IllegalArgumentException("Optional length more than array length");
         }
-       
+
         for (int i = begin + 1; i <= end; i++) {
             for (int j = i; j > begin && arr[j - 1].compareTo(arr[j]) > 0; j--) {
                 T temp = arr[j];
@@ -84,7 +93,6 @@ public class MergeSort {
         insertSort(arr, begin, mid);
         insertSort(arr, mid + 1, end);
         mergeSortInPlace(arr, begin, mid, end);
-
     }
 
     /**
@@ -140,11 +148,74 @@ public class MergeSort {
          *          适用于只用链表是的数据
          */
         begin = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();
-        Character[] characters1 = new Character[]{'M', 'E', 'R', 'G', 'E', 'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M', 'P', 'L', 'E'};
-        lowToHightSort(characters1);
-        System.out.println(Arrays.toString(characters1));
+        characters = new Character[]{'M', 'E', 'R', 'G', 'E', 'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M',
+                'P', 'L', 'E'};
+        lowToHightSort(characters);
+        System.out.println(Arrays.toString(characters));
         end = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();
         System.out.println("自低向上" +
                 "的时间 ：(毫秒)" + (end - begin));
+
+       // 用希尔排序
+        characters = new Character[]{'M', 'E', 'R', 'G', 'E', 'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M',
+                'P', 'L', 'E'};
+        lo = 0;
+        hi = characters.length - 1;
+        mid = lo + (hi - lo) / 2;
+        begin = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();
+        hillBinarySort(characters, lo, mid);
+        System.out.println("左边排序结果 ：" + Arrays.toString(characters));
+        hillBinarySort(characters, mid + 1, hi);
+        System.out.println("右边排序结果 ：" + Arrays.toString(characters));
+        mergeSortInPlace(characters, lo, mid, hi - 1);
+        System.out.println("希尔最后的结果 ：" + Arrays.toString(characters));
+        end = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();
+        System.out.println("希尔的时间 ：(毫秒)" + (end - begin));
+
+    }
+
+    /**
+     * 希尔加归排
+     *
+     * @param arr
+     * @param begin
+     * @param end
+     * @param <T>
+     */
+    public static <T extends Comparable> void hillBinarySort(T[] arr, int begin, int end) {
+        int mid = (end - begin) / 2 + begin;
+        if (end - begin <= 1 && arr[mid + 1].compareTo(arr[mid]) > 0) {
+            return;
+        }
+        if (end - begin > 1) {
+            hillBinarySort(arr, begin, mid);
+            hillBinarySort(arr, mid + 1, end);
+        }
+        hillSort(arr, begin, mid);
+        hillSort(arr, mid + 1, end);
+        mergeSortInPlace(arr, begin, mid, end);
+    }
+
+    public static <T extends Comparable> void hillSort(T[] arr, int lo, int hi) {
+        if (lo >= hi) {
+            return;
+        }
+        int lenth = hi - lo + 1;
+        int h = 1;
+        while (h < (lenth / 3)) {
+            h = 3 * h;
+        }
+        h++;
+        T temp = null;
+        while (h >= 1) {
+            for (int i = lo + h; i < lenth + lo; i++) {
+                for (int j = i; j >= h + lo && arr[j].compareTo(arr[j - h]) < 0; j -= h) {
+                    temp = arr[j];
+                    arr[j] = arr[j - h];
+                    arr[j - h] = temp;
+                }
+            }
+            h = h / 3;
+        }
     }
 }
