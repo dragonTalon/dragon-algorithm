@@ -26,8 +26,11 @@ public class ThrQuickSort {
             } else {
                 i++;
             }
+            System.out.println("dw:\t"+ dw+"\tgw:\t"+gw);
+            System.out.println(Arrays.toString(arr));
 
         }
+        System.out.println("结果：dw:\t"+ dw+"\tlo:\t"+lo+"\tgw:\t"+gw+"\thi:"+hi+"\t\t\t"+Arrays.toString(arr));
         sort(arr, lo, dw-1);//-1的原因是因为dw++实际上是指向下一个待交换的位置
         sort(arr, gw+1, hi);//+1同上
     }
@@ -39,8 +42,11 @@ public class ThrQuickSort {
     }
 
     public static void main(String[] args) {
-        Character[] characters = new Character[]{'M', 'E', 'R', 'G', 'E', 'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M', 'P', 'L', 'E'};
+      /*  Character[] characters = new Character[]{'M', 'E', 'R', 'G', 'E', 'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M', 'P', 'L', 'E'};
         sort(characters, 0, characters.length - 1);
-        System.out.println(Arrays.toString(characters));
+        System.out.println(Arrays.toString(characters));*/
+      Integer [] arr = new Integer[]{6,1,3,7,4,5,9};
+      sort(arr,0,arr.length-1);
+        System.out.println(Arrays.toString(arr));
     }
 }
