@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * 最大 优先队列
  * 二叉堆
- *
+ *  找最大的时候 可以降序
  * @author dragonboy
  */
 public class HeapSort<Key extends Comparable<Key>> {
