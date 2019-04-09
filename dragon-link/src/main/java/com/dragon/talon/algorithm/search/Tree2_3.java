@@ -40,6 +40,7 @@ public class Tree2_3 {
                 if (node.getMidNode() != null) {
                     insert(value, node.midNode);
                 } else {
+                    spiltNode(node, new Node(value));
                     //节点切分
                 }
             }
@@ -319,10 +320,11 @@ public class Tree2_3 {
     public static void main(String[] args) {
         Tree2_3 tree2_3 = new Tree2_3();
         tree2_3.add("A");
-        tree2_3.add("B");
         tree2_3.add("C");
-        tree2_3.add("D");
+        tree2_3.add("B");
         tree2_3.add("E");
+        tree2_3.add("D");
+       
         tree2_3.add("F");
         tree2_3.add("G");
         tree2_3.add("H");
