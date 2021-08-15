@@ -2,6 +2,7 @@ package com.dragon.talon.algorithm.sort;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -18,7 +19,7 @@ public class InsertSort {
         if (arr.length <= 0) {
             throw new IllegalArgumentException("数组不能为空");
         }
-        long count = 0; 
+        long count = 0;
         for (int i = 1; i < arr.length; i++) {
             for (int j = i; j > 0&&arr[j].compareTo(arr[j - 1])<0; j--) {
                 count++;
@@ -28,6 +29,7 @@ public class InsertSort {
 
             }
         }
+        ArrayList<Integer> array = new ArrayList<Integer>();
         System.out.println(" compare and exchange  : "+ count);
     }
 
