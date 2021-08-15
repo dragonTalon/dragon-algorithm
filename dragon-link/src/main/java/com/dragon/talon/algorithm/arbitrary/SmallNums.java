@@ -1,4 +1,4 @@
-package com.dragon.talon.algorithm.demo;
+package com.dragon.talon.algorithm.arbitrary;
 
 /**
  * @ClassName SmallNums

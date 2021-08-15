@@ -1,4 +1,4 @@
-package com.dragon.talon.algorithm.demo;
+package com.dragon.talon.algorithm.arbitrary;
 
 import java.util.ArrayList;
 import java.util.List;
